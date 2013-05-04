@@ -1,0 +1,55 @@
+<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="OpenIdRelyingPartyMvc.Views.Shared.Site" %>
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Wave OpenID Relying Party</title>
+        <link href="http://wave.com/sites/all/themes/wave/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+        <meta name="viewport" content="width=device-width" />
+        <link href='<%= Url.Content("~/Content/Site.css") %>' rel="stylesheet" type="text/css" />
+        <script src='<%= Url.Content("~/Content/scripts/jquery-1.7.1.min.js") %>' type="text/javascript"></script>
+	    <asp:ContentPlaceHolder ID="HeadContentPlaceHolder" runat="server" />
+</head>
+    <body>
+        <header>
+            <div style="width:900px;margin: 0 auto;">
+                <div class="float-left" >
+                    <p class="site-title">
+                        <img src="/content/Images/favicon.gif" style="padding-left:3px;" />
+                        <span style="padding-bottom:5px;line-height:40px;vertical-align:super;margin-left:10px;">wave OpenID Sample Relying Party</span>
+                    </p>
+                </div>
+                <div class="float-right">
+                    <section id="login">
+                    </section>
+                    <nav>
+                        <ul id="menu">
+                            <li><%= Html.ActionLink("Home", "Index", "Home")%></li>&nbsp|&nbsp;<li><%= Html.ActionLink("Members", "Index", "User")%></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </header>
+        <div id="body">
+            <section class="content-wrapper main-content clear-fix" style="width:900px;">
+            <asp:ContentPlaceHolder ID="MainContentPlaceHolder" runat="server"/>
+            </section>
+        </div>
+        <footer>
+            <div class="content-wrapper">
+                <div class="float-left">
+                    <p>&copy; 2013 - Wave Systems</p>
+                </div>
+            </div>
+        </footer>
+
+        <script type="text/javascript">
+            if (document.location !== window.top.location) {
+                window.top.location = document.location;
+            }
+        </script>
+
+    </body>
+</html>
+
