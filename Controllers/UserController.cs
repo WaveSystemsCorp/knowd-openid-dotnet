@@ -84,11 +84,14 @@ namespace OpenIdRelyingPartyMvc.Controllers
         private IAuthenticationRequest BuildOpenIdRequest(string openIdProviderIdentifier)
         {
             IAuthenticationRequest req = openid.CreateRequest(openIdProviderIdentifier);
+        
+        
+        
 
             FetchRequest fetch = new FetchRequest();
-            fetch.Attributes.Add(new AttributeRequest("http://machineid.com/schema/trustScore", true /* required */));
-            fetch.Attributes.Add(new AttributeRequest("http://machineid.com/schema/needsSetup", false /* optional */));
-            fetch.Attributes.Add(new AttributeRequest("http://machineid.com/schema/setupURL", false /* optional */));
+            fetch.Attributes.Add(new AttributeRequest("http://schema.wave.com/endpoint/descriptor/trustScore", true /* required */));
+            fetch.Attributes.Add(new AttributeRequest("http://schema.wave.com/endpoint/descriptor/needsSetup", false /* optional */));
+            fetch.Attributes.Add(new AttributeRequest("http://schema.wave.com/endpoint/descriptor/setupURL", false /* optional */));
             req.AddExtension(fetch);
 
             return req;
@@ -99,9 +102,9 @@ namespace OpenIdRelyingPartyMvc.Controllers
             FetchResponse fetch = response.GetExtension<FetchResponse>();
             if (null != fetch)
             {
-                Session["OpenIdResponse_trustScore"] = fetch.GetAttributeValue("http://machineid.com/schema/trustScore");
-                Session["OpenIdResponse_needsSetup"] = fetch.GetAttributeValue("http://machineid.com/schema/needsSetup");
-                Session["OpenIdResponse_setupURL"] = fetch.GetAttributeValue("http://machineid.com/schema/setupURL");
+                Session["OpenIdResponse_trustScore"] = fetch.GetAttributeValue("http://schema.wave.com/endpoint/descriptor/trustScore");
+                Session["OpenIdResponse_needsSetup"] = fetch.GetAttributeValue("http://schema.wave.com/endpoint/descriptor/needsSetup");
+                Session["OpenIdResponse_setupURL"] = fetch.GetAttributeValue("http://schema.wave.com/endpoint/descriptor/setupURL");
                 // needsSetup and setupURL only returned if needed. Returned value is null otherwise.
             }
             Session["FriendlyIdentifier"] = response.FriendlyIdentifierForDisplay;
